@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { goBack } from 'connected-react-router';
 import Table from '@material-ui/core/Table';
@@ -12,9 +12,12 @@ import Paper from '@material-ui/core/Paper';
 import useMount from '../../hooks/useMount';
 import jsonApi from '../../services/jsonApi';
 
+import useStyles from './styles';
+
 const Users = () => {
   const [setUsers] = useState([]);
   const dispatch = useDispatch();
+  const estilo = useStyles();
   const handleGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
 
   useMount(async () => {
@@ -70,6 +73,11 @@ const Users = () => {
           </TableBody>
         </Table>
       </Paper>
+      <Grid className={estilo.grid}>
+        <Button variant='contained' color='primary' onClick={handleGoBack}>
+          Go Back
+        </Button>
+      </Grid>
     </div>
   );
 };

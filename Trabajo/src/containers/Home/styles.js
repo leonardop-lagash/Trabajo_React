@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles(theme => ({
   container: {
     paddingLeft: 0,
@@ -9,13 +10,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     height: '100vh',
     alignItems: 'center',
-    justifyContent: 'center',
-    [theme.breakpoints.down('md')]: {
-      backgroundPosition: '25% 75%'
-    },
-    [theme.breakpoints.up('lg')]: {
-      backgroundPosition: 'center'
-    }
+    justifyContent: 'center'
   },
 
   btUser: {

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { goBack } from 'connected-react-router';
 // import Table from '@material-ui/core/Table';
@@ -12,11 +12,14 @@ import { goBack } from 'connected-react-router';
 import useMount from '../../hooks/useMount';
 import jsonApi from '../../services/jsonApi';
 
+import useStyles from './styles';
+
 const Random = () => {
   const dispatch = useDispatch();
   const handleGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
 
   const [users, setUsers] = useState([]);
+  const estilo = useStyles();
 
   useMount(async () => {
     const { data } = await jsonApi().getUsers();
@@ -76,6 +79,12 @@ const Random = () => {
           </TableBody>
         </Table>
       </Paper> */}
+      <Grid className={estilo.grid}>
+        <Button variant='contained' color='primary' onClick={handleGoBack}>
+          Go Back
+        </Button>
+      </Grid>
+
       <div />
     </div>
   );
