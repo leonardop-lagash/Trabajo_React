@@ -9,13 +9,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     height: '100vh',
     alignItems: 'center',
-    justifyContent: 'center',
-    [theme.breakpoints.down('md')]: {
-      backgroundPosition: '25% 75%'
-    },
-    [theme.breakpoints.up('lg')]: {
-      backgroundPosition: 'center'
-    }
+    justifyContent: 'center'
   },
 
   btUser: {

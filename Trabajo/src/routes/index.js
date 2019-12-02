@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { Home } from '../containers';
-import { Random, Users } from '../containers';
+import { Home, Random, Users } from '../containers';
+
 import { ROOT, RANDOM, USERS } from './paths';
 
 const Routes = () => (
