@@ -6,7 +6,7 @@ const config = {
 
 const createApi = () => {
   const { get } = create(config);
-  const getUsers = () => get('?results=50&inc=name,picture&format=json');
+  const getUsers = () => get('?results=50&inc=name,picture,login&format=json');
 
   return {
     getUsers
