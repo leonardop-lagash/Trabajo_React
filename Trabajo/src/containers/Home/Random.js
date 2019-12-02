@@ -22,7 +22,7 @@ const Random = () => {
     const { data } = await jsonApi().getUsers();
 
     if (Array.isArray) {
-      setUsers(data);
+      setUsers(data.results);
     }
   });
 
@@ -45,11 +45,14 @@ const Random = () => {
         Go Back
       </Button>
 
-      <div>
-        {users.map(({ name }) => (
-          <p> {name.first}</p>
-        ))}
-      </div>
+      {users.map(({ name, picture }) => (
+        <div>
+          <img src={picture.medium} alt={name.first} />
+          <p>
+            {name.first} {name.last}
+          </p>
+        </div>
+      ))}
 
       {/* <Paper>
         <Table aria-label='simple table'>
