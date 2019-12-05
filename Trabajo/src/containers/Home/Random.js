@@ -1,33 +1,47 @@
-import React, { useState, useCallback } from 'react';
-import { Button, Grid, Avatar } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { goBack } from 'connected-react-router';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import SaveIcon from '@material-ui/icons/Save';
+import {
+  Button,
+  Grid,
+  Avatar,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton
+} from '@material-ui/core';
 
 import useMount from '../../hooks/useMount';
 import jsonApi from '../../services/jsonApi';
+import { importUsers, saveUser } from '../../actions/random';
 
-import useStyles from './styles';
+// import useStyles from './styles';
 
 const Random = () => {
   const dispatch = useDispatch();
   const handleGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
+  const { users } = useSelector(({ random }) => random);
+  // const estilo = useStyles();
 
-  const [users, setUsers] = useState([]);
-  const estilo = useStyles();
+  const handleImportUsers = useCallback(e => dispatch(importUsers(e)), [
+    dispatch
+  ]);
 
   useMount(async () => {
     const { data } = await jsonApi().getUsers();
 
-    if (Array.isArray) {
-      setUsers(data.results);
+    if (Array.isArray(data.results)) {
+      handleImportUsers(data.results);
     }
   });
+
+  const handleSaveUser = useCallback(index => () => dispatch(saveUser(index)), [
+    dispatch
+  ]);
 
   return (
     <div>
@@ -35,15 +49,6 @@ const Random = () => {
       <Button variant='contained' color='primary' onClick={handleGoBack}>
         Go Back
       </Button>
-
-      {/* {users.map(({ name, picture }) => (
-        <div>
-          <img src={picture.medium} alt={name.first} />
-          <p>
-            {name.first} {name.last}
-          </p>
-        </div>
-      ))} */}
 
       <Paper>
         <Table aria-label='simple table'>
@@ -56,26 +61,31 @@ const Random = () => {
           </TableHead>
 
           <TableBody>
-            {users.map(({ name, picture, login }) => (
+            {users.map(({ name, picture, login, email, index }) => (
               <TableRow key={login.uuid}>
                 <TableCell align='left'>
                   <Avatar src={picture.thumbnail} alt='Avatar' />
                 </TableCell>
                 <TableCell align='left'>
-                  {`${name.first} ${name.last}`}
+                  <Grid>
+                    <Grid>{`${name.first} ${name.last}`}</Grid>
+                    <Grid>{email}</Grid>
+                  </Grid>
                 </TableCell>
-                <TableCell align='right'>{}</TableCell>
+                <TableCell align='right'>
+                  <IconButton
+                    color='primary'
+                    aria-label='add to shopping cart'
+                    onClick={handleSaveUser(index)}
+                  >
+                    <SaveIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </Paper>
-      <Grid className={estilo.grid}>
-        <Button variant='contained' color='primary' onClick={handleGoBack}>
-          Go Back
-        </Button>
-      </Grid>
-
       <div />
     </div>
   );
