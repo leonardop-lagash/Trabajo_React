@@ -12,17 +12,24 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-// import useStyles from './styles';
+import { deleteUser, editUser } from '../../actions/random';
 
 const Users = () => {
   const dispatch = useDispatch();
   const { savedUsers } = useSelector(({ random }) => random);
-  // const estilo = useStyles();
   const handleGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
+
+  const handleDelUser = useCallback(
+    index => () => dispatch(deleteUser(index)),
+    [dispatch]
+  );
+  const handleEditUser = useCallback(index => () => dispatch(editUser(index)), [
+    dispatch
+  ]);
 
   return (
     <div>
-      <h1>Listado de Usuarios Aleatoreo</h1>
+      <h1>Listado de Usuarios Guardados</h1>
       <Button variant='contained' color='primary' onClick={handleGoBack}>
         Go Back
       </Button>
@@ -51,12 +58,14 @@ const Users = () => {
                   </Grid>
                 </TableCell>
                 <TableCell align='right'>
-                  <IconButton>
+                  <IconButton onClick={handleEditUser(0)}>
                     <EditIcon />
                   </IconButton>
                 </TableCell>
                 <TableCell align='right'>
-                  <IconButton>
+                  <IconButton
+                    onClick={handleDelUser(0 /* savedUsers.indexOf() */)}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>

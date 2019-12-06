@@ -26,13 +26,12 @@ const saveUser = produce((draft, { index }) => {
 
 // eslint-disable-next-line no-unused-vars
 const editUser = produce((draft, { index }) => {
-  //   draft.menuDislikes.push(draft.menu[index]);
-  //   draft.menu = draft.menu.filter((m, i) => i !== index);
+  alert('Aún no funciona we xD');
 });
 
 const deleteUser = produce((draft, { index }) => {
-  draft.menuDislikes.push(draft.menu[index]);
-  draft.menu = draft.menu.filter((m, i) => i !== index);
+  draft.savedUsers = draft.savedUsers.filter((u, i) => i !== index);
+  // alert('te la creiste we xD');
 });
 
 const reducer = createReducer(INITIAL_STATE, {
