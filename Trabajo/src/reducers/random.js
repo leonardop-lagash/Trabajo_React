@@ -21,7 +21,7 @@ const importUsers = produce((draft, { e }) => {
 
 const saveUser = produce((draft, { index }) => {
   draft.savedUsers.push(draft.users[index]);
-  draft.users = draft.users.filter((u, i) => i !== index); // u:users -- i: índice
+  draft.users = draft.users.filter((u, i) => i !== index);
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -31,7 +31,6 @@ const editUser = produce((draft, { index }) => {
 
 const deleteUser = produce((draft, { index }) => {
   draft.savedUsers = draft.savedUsers.filter((u, i) => i !== index);
-  // alert('te la creiste we xD');
 });
 
 const reducer = createReducer(INITIAL_STATE, {

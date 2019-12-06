@@ -19,13 +19,10 @@ import useMount from '../../hooks/useMount';
 import jsonApi from '../../services/jsonApi';
 import { importUsers, saveUser } from '../../actions/random';
 
-// import useStyles from './styles';
-
 const Random = () => {
   const dispatch = useDispatch();
   const handleGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
   const { users } = useSelector(({ random }) => random);
-  // const estilo = useStyles();
 
   const handleImportUsers = useCallback(e => dispatch(importUsers(e)), [
     dispatch
