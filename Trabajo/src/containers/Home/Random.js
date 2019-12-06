@@ -61,15 +61,15 @@ const Random = () => {
           </TableHead>
 
           <TableBody>
-            {users.map(({ name, picture, login, email, index }) => (
-              <TableRow key={login.uuid}>
+            {users.map((user, index) => (
+              <TableRow key={user.login.uuid}>
                 <TableCell align='left'>
-                  <Avatar src={picture.thumbnail} alt='Avatar' />
+                  <Avatar src={user.picture.thumbnail} alt='Avatar' />
                 </TableCell>
                 <TableCell align='left'>
                   <Grid>
-                    <Grid>{`${name.first} ${name.last}`}</Grid>
-                    <Grid>{email}</Grid>
+                    <Grid>{`${user.name.first} ${user.name.last}`}</Grid>
+                    <Grid>{user.email}</Grid>
                   </Grid>
                 </TableCell>
                 <TableCell align='right'>
