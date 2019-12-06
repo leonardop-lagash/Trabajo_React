@@ -26,6 +26,7 @@ const saveUser = produce((draft, { index }) => {
 
 // eslint-disable-next-line no-unused-vars
 const editUser = produce((draft, { index }) => {
+  // eslint-disable-next-line no-alert
   alert('Aún no funciona we xD');
 });
 

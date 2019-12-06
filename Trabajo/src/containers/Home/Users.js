@@ -19,7 +19,7 @@ const Users = () => {
   const { savedUsers } = useSelector(({ random }) => random);
   const handleGoBack = useCallback(() => dispatch(goBack()), [dispatch]);
 
-  const handleDelUser = useCallback(
+  const handleDeleteUser = useCallback(
     index => () => dispatch(deleteUser(index)),
     [dispatch]
   );
@@ -46,26 +46,24 @@ const Users = () => {
           </TableHead>
 
           <TableBody>
-            {savedUsers.map(({ name, picture, login, email }) => (
-              <TableRow key={login.uuid}>
+            {savedUsers.map((user, index) => (
+              <TableRow key={user.login.uuid}>
                 <TableCell align='left'>
-                  <Avatar src={picture.thumbnail} alt='Avatar' />
+                  <Avatar src={user.picture.thumbnail} alt='Avatar' />
                 </TableCell>
                 <TableCell align='left'>
                   <Grid>
-                    <Grid>{`${name.first} ${name.last}`}</Grid>
-                    <Grid>{email}</Grid>
+                    <Grid>{`${user.name.first} ${user.name.last}`}</Grid>
+                    <Grid>{user.email}</Grid>
                   </Grid>
                 </TableCell>
                 <TableCell align='right'>
-                  <IconButton onClick={handleEditUser(0)}>
+                  <IconButton onClick={handleEditUser(index)}>
                     <EditIcon />
                   </IconButton>
                 </TableCell>
                 <TableCell align='right'>
-                  <IconButton
-                    onClick={handleDelUser(0 /* savedUsers.indexOf() */)}
-                  >
+                  <IconButton onClick={handleDeleteUser(index)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
